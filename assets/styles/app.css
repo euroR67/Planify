@@ -1,3 +1,77 @@
+
+/* ========== MOBILE FIRST APPROACH ========== */
+
+:root {
+    /* Colors */
+    --clr-primary: #f4f4f4;
+    --clr-primary-opacity: rgba(244, 244, 244, 0.1);
+    --clr-secondary: #d0d0d0;
+    --clr-dark-bg: #1D2125;
+    --clr-dark-blue: #1b1e2b;
+
+    /* Fonts */
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Open Sans', sans-serif;
+}
+
+/* Global Reset Styles */
+
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Layout Styles from base.html.twig */
+
 body {
-    background-color: skyblue;
+    background-color: var(--clr-dark-blue);
+}
+
+/* ========== Header Styles ========== */
+
+header {
+    background-color: var(--clr-dark-bg);
+    padding: 1rem 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div.logo {
+    padding: 5px;
+    border-radius: 10Px;
+}
+
+header div.logo img {
+    width: 150px;
+}
+
+header div.logo:hover {
+    cursor: pointer;
+    background-color: var(--clr-primary-opacity);
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+header nav ul li a {
+    color: var(--clr-primary);
+    font-size: 1.2rem;
 }
