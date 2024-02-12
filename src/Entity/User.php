@@ -35,9 +35,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'author', orphanRemoval: true)]
     private Collection $projects;
 
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'members')]
+    #[ORM\JoinTable(name:"user_members_project")]
+    private Collection $members;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'favorisUsers')]
+    #[ORM\JoinTable(name:"user_favoris_project")]
+    private Collection $favoris;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->members = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,6 +146,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $project->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(Project $member): static
+    {
+        if (!$this->members->contains($member)) {
+            $this->members->add($member);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(Project $member): static
+    {
+        $this->members->removeElement($member);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Project $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Project $favori): static
+    {
+        $this->favoris->removeElement($favori);
 
         return $this;
     }

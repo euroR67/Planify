@@ -8,10 +8,12 @@
     --clr-secondary: #d0d0d0;
     --clr-dark-bg: #1D2125;
     --clr-dark-blue: #1b1e2b;
+    --clr-dynamic-text: #9FADBC;
+    --clr-hover-bg: #A6C5E229;
 
     /* Fonts */
-    --font-primary: 'Roboto', sans-serif;
-    --font-secondary: 'Open Sans', sans-serif;
+    --font-primary: 'Cabin', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
 }
 
 /* Global Reset Styles */
@@ -24,7 +26,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-primary);
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
@@ -34,7 +36,10 @@
 /* Layout Styles from base.html.twig */
 
 body {
-    background-color: var(--clr-dark-blue);
+    background: rgb(54,65,83);
+    background: linear-gradient(150deg, rgba(54,65,83,1) 0%, rgba(38,50,71,1) 35%, rgba(18,31,55,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* ========== Header Styles ========== */
@@ -52,17 +57,45 @@ header nav {
 }
 
 header div.logo {
-    padding: 5px;
-    border-radius: 10Px;
+    padding: 10px;
+    padding-bottom: 7px;
+    border-radius: 10px;
 }
 
 header div.logo img {
-    width: 150px;
+    width: 110px;
+}
+
+header div.logo a {
+    color: var(--clr-dynamic-text);
+    font-size: 1.3rem;
 }
 
 header div.logo:hover {
     cursor: pointer;
-    background-color: var(--clr-primary-opacity);
+    background-color: #A6C5E229;
+}
+
+header div.logo:hover a i {
+    animation: threeDimensionRotate 2s ease infinite;
+}
+
+@keyframes threeDimensionRotate {
+    0% {
+        transform: rotateY(0deg);
+    }
+    25% {
+        transform: rotateY(180deg);
+    }
+    50% {
+        transform: rotateY(360deg);
+    }
+    75% {
+        transform: rotateX(180deg);
+    }
+    100% {
+        transform: rotateX(360deg);
+    }
 }
 
 header nav ul {
@@ -72,6 +105,12 @@ header nav ul {
 }
 
 header nav ul li a {
-    color: var(--clr-primary);
+    color: var(--clr-dynamic-text);
     font-size: 1.2rem;
+}
+
+header div.left-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }

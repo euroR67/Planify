@@ -31,9 +31,17 @@ class Project
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'members')]
+    private Collection $members;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoris')]
+    private Collection $favorisUsers;
+
     public function __construct()
     {
         $this->lists = new ArrayCollection();
+        $this->members = new ArrayCollection();
+        $this->favorisUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,6 +123,60 @@ class Project
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getMembers(): Collection
+    {
+        return $this->members;
+    }
+
+    public function addMember(User $member): static
+    {
+        if (!$this->members->contains($member)) {
+            $this->members->add($member);
+            $member->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMember(User $member): static
+    {
+        if ($this->members->removeElement($member)) {
+            $member->removeMember($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavorisUsers(): Collection
+    {
+        return $this->favorisUsers;
+    }
+
+    public function addFavorisUser(User $favorisUser): static
+    {
+        if (!$this->favorisUsers->contains($favorisUser)) {
+            $this->favorisUsers->add($favorisUser);
+            $favorisUser->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorisUser(User $favorisUser): static
+    {
+        if ($this->favorisUsers->removeElement($favorisUser)) {
+            $favorisUser->removeFavori($this);
+        }
 
         return $this;
     }
