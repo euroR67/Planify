@@ -36,18 +36,16 @@
 /* Layout Styles from base.html.twig */
 
 body {
-    background: rgb(54,65,83);
-    background: linear-gradient(150deg, rgba(54,65,83,1) 0%, rgba(38,50,71,1) 35%, rgba(18,31,55,1) 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: var(--clr-dark-bg);
 }
 
 /* ========== Header Styles ========== */
 
 header {
     background-color: var(--clr-dark-bg);
-    padding: 1rem 2rem;
+    padding: 10px 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--clr-primary-opacity);
 }
 
 header nav {
@@ -113,4 +111,19 @@ header div.left-nav {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+/* =============== Home view =============== */
+
+main.home-container {
+    background-color: var(--clr-dark-bg);
+}
+
+/* =============== Project view =============== */
+
+main.project-container {
+    background: rgb(54,65,83);
+    background: linear-gradient(150deg, rgba(54,65,83,1) 0%, rgba(38,50,71,1) 35%, rgba(18,31,55,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
